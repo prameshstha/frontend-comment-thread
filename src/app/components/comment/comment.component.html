@@ -1,0 +1,73 @@
+<div class="comment container single_comment">
+  <div class="c-score">
+    <fa-icon
+      class="clickable_link"
+      (click)="changeScore(single_comment, 1, replyToComment)"
+      [icon]="faPlus"
+    ></fa-icon>
+
+    <span class="score-number">{{ single_comment.score }}</span>
+    <fa-icon
+      class="clickable_link"
+      (click)="changeScore(single_comment, 0, replyToComment)"
+      [icon]="faMinus"
+    ></fa-icon>
+  </div>
+  <div class="c-controls">
+    <span *ngIf="current_user">
+      <span
+        class="text-danger m-2 clickable_link"
+        (click)="deleteComment(single_comment, replyToComment)"
+        ><fa-icon [icon]="faTrash"></fa-icon>Delete</span
+      >
+      <span class="clickable_link" (click)="openEdit(comment, single_comment)">
+        <span *ngIf="!editmode"><fa-icon [icon]="faPencil"></fa-icon>Edit</span>
+        <span *ngIf="editmode"><fa-icon [icon]="faSave"></fa-icon>Save</span>
+      </span>
+    </span>
+    <span
+      class="reply"
+      class="clickable_link"
+      (click)="openReply(comment, single_comment)"
+    >
+      <!-- {{ single_comment }}{{ replyCommentUser }} -->
+      <!-- {{ console.log("single commment", single_comment) }}
+      {{ console.log("reply details", replyCommentUser) }} -->
+      <span class="text-danger" *ngIf="single_comment?.id === replyCommentId">
+        <fa-icon [icon]="faTimes"></fa-icon> Cancel</span
+      >
+      <span *ngIf="single_comment?.id !== replyCommentId">
+        <fa-icon [icon]="faReply"></fa-icon> Reply</span
+      >
+    </span>
+  </div>
+  <div class="c-user">
+    <img
+      src="assets/{{ single_comment?.user?.image.png }}"
+      alt=""
+      class="usr-img"
+    />
+    <p class="usr-name">{{ single_comment?.user?.username }}</p>
+    <p class="you" *ngIf="current_user">You</p>
+
+    <p class="cmnt-at">{{ single_comment.createdAt | datePipe }}</p>
+  </div>
+  <p class="c-text">
+    <span *ngIf="single_comment.replyingTo" class="reply-to"
+      >@{{ single_comment.replyingTo }}
+    </span>
+    <span *ngIf="!editmode" class="c-body">{{ single_comment.content }}</span>
+    <!-- {{ single_comment.id }}{{ editmode }} -->
+    <!-- editmode -->
+    <span class="edit_comment">
+      <textarea
+        *ngIf="editmode"
+        #editedComment
+        (input)="tempEditedComment(editedComment.value)"
+        class="cmnt-input"
+        [value]="single_comment.content"
+      >
+      </textarea></span
+    ><!-- editmode --><br /><span class="text-success">{{ message }}</span>
+  </p>
+</div>

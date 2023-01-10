@@ -1,0 +1,52 @@
+<div class="comment__main">
+  <div class="comment-wrp">
+    <!--start comment-->
+    <app-comment
+      [comment]="single_comment"
+      [single_comment]="single_comment"
+      [console]="console"
+      [current_user]="logged_in_user == single_comment?.user?.username"
+      [comRep]="'com'"
+      [replyCommentId]="replyDetails?.replyToComment?.id"
+      [showReplyBox]="showReplyBox"
+      (deleteCommentEmit)="openModal($event)"
+      (openReplyEmit)="openReplyBox($event)"
+    ></app-comment>
+    <!-- end comment -->
+    <!--start replies  -->
+    <div class="replies comments-wrp">
+      <div *ngFor="let reply of single_comment.replies">
+        <app-comment
+          [comment]="single_comment"
+          [single_comment]="reply"
+          [current_user]="logged_in_user == reply?.user?.username"
+          [console]="console"
+          [comRep]="'rep'"
+          [replyToComment]="single_comment"
+          [replyCommentId]="replyDetails?.replyToComment?.id"
+          [showReplyBox]="showReplyBox"
+          (deleteCommentEmit)="openModal($event)"
+          (openReplyEmit)="openReplyBox($event)"
+        ></app-comment>
+      </div>
+    </div>
+    <!--end replies-->
+    <!--start add replies -->
+    <div *ngIf="showReplyBox" class="replies comments-wrp">
+      <app-add-comment
+        [current_user_details]="current_user_details"
+        [console]="console"
+        [replyingTo]="replyDetails"
+        (showReplyBoxOut)="showReplyBox1($event)"
+      ></app-add-comment>
+    </div>
+    <!--end add replies -->
+  </div>
+  <!-- <div class="confirm_modal"> -->
+  <app-modal
+    *ngIf="showModal"
+    (closeEmit)="closeModal()"
+    (finalDeleteEmit)="deleteComment()"
+  ></app-modal>
+  <!-- </div> -->
+</div>

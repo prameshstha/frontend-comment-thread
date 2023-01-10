@@ -1,0 +1,15 @@
+<!-- <p>allcomments works!</p> -->
+<div *ngIf="current_user.username" class="allcomments_main__div">
+  <!-- {{console.log(all_comment_data)}} -->
+  <app-comment-replies
+    *ngFor="let comment of all_comment_data"
+    [single_comment]="comment"
+    [logged_in_user]="current_user.username"
+    [console]="console"
+    [current_user_details]="current_user"
+  ></app-comment-replies>
+  <app-add-comment
+    [current_user_details]="current_user"
+    [console]="console"
+  ></app-add-comment>
+</div>

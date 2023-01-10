@@ -1,0 +1,15 @@
+.add__label {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: -10px;
+  color: hsl(211, 10%, 45%);
+  background-color: white;
+}
+.cmnt-input:focus {
+  outline: none !important;
+  border: 2px solid hsl(238, 40%, 52%);
+}
+.usr-img {
+  height: 4rem;
+  width: auto;
+}

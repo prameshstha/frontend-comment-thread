@@ -1,0 +1,17 @@
+.cmnt-input:focus {
+  outline: none !important;
+  border: 2px solid hsl(238, 40%, 52%);
+}
+.cmnt-input {
+  grid-area: input;
+  padding: 1rem;
+  width: 95%;
+  height: auto;
+  border: 1px solid var(--Light-gray);
+  border-radius: 4px;
+  /* overflow: visible; */
+  /* resize: none; */
+}
+.edit_comment {
+  height: max-content;
+}

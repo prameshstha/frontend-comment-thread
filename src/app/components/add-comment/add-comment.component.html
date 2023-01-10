@@ -1,0 +1,28 @@
+<div className=" card add-comment">
+  <div class="reply-input container">
+    <!-- {{console.log(current_user_details)}} -->
+    <img
+      src="assets/{{ current_user_details.image.png }}"
+      alt=""
+      class="usr-img"
+    />
+
+    <div class="w-100">
+      <label
+        class="add__label"
+        [textContent]="replyingTo ? replyingTo.replyingTo : 'Add comment'"
+      ></label>
+      <textarea
+        #newComment
+        (input)="tempCommentSave(newComment.value)"
+        [value]="defaultText"
+        class="cmnt-input"
+        [placeholder]="replyingTo ? 'reply...' : 'Add a comment...'"
+      ></textarea>
+    </div>
+    <div>
+      <button class="bu-primary" (click)="addComment(replyingTo)">SEND</button
+      ><span class="text-danger w-100">{{ errorMessage }}</span>
+    </div>
+  </div>
+</div>
